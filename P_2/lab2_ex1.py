@@ -1,4 +1,4 @@
-import numpyimport numpy as np
+import numpy as np
 
 # 4x4 array
 array_4x4 = np.array([

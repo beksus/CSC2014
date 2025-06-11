@@ -6,74 +6,39 @@ Created on Wed Jun 11 08:46:45 2025
 """
 
 import numpy as np
-8
-9
-
-10
 import cv2
-11
-from matplotlib import pyplot as
-12
-simple_image = np.zeros ((256,256), dtype=np.float64)
-13
-simple_image[124:132,124:132] = 255
-14
+from matplotlib import pyplot as pt
+
+simple_image = np.zeros((256, 256), dtype=np.float64)
+simple_image[124:132, 124:132] = 255
 fourier_coeff = np.fft.fft2(simple_image)
-15
-fourier_coeff_center = np. fft.fftshift(fourier_coeff)
-16
-spectrum = np. abs(fourier_coeff_center)
-17
-spectrum_log = np. 10g(1+spectrum)
-18
-fourier_coeff_origin = np. fft. ifftshift(fourier_coeff_center)
-19
+fourier_coeff_center = np.fft.fftshift(fourier_coeff)
+spectrum = np.abs(fourier_coeff_center)
+spectrum_log = np.log(1 + spectrum)
+fourier_coeff_origin = np.fft.ifftshift(fourier_coeff_center)
 simple_original = np.fft.ifft2(fourier_coeff_origin)
-20
 simple_original = np.abs(simple_original)
-21
-phase = np. angle(fourier_coeff_center)
-22
-phase = np.abs (phase)
-23
-pt. figure()
-24
-pt. subplot(2,3,1)
-25
-pt. imshow(simple_image, cmap="gray")
-26
-pt. title("Simple Image")
-27
-pt. subplot (2,3,2)
-28
-pt. imshow (spectrum, cmap="gray")
-29
-pt. title("Spectrum Before Log Enhanced")
-30
-pt. subplot (2,3,3)
-31
-pt. imshow(spectrum_ log, cmap="gray")
-32
-pt. title("Spectrum After Log Enhanced")
-33
-pt. subplot (2,3,4)
-34
-pt. imshow(simple_original, cmap="gray")
-35
-pt. title("Restructured image")
-36
-pt. subplot (2,3,5)
-37
-pt. imshow(np. abs (simple_image - simple _original), cmap="gray")
-38
-pt. title("Difference between simple image and restructered image")
-39
-pt. subplot (2,3,6)
-40
-pt. imshow phase, cmap="gray")
-41
-pt. title( "Phase")
-42
-pt. tight_layout ()
-43
-pt. show()
+phase = np.angle(fourier_coeff_center)
+phase = np.abs(phase)
+
+pt.figure()
+pt.subplot(2, 3, 1)
+pt.imshow(simple_image, cmap="gray")
+pt.title("Simple Image")
+pt.subplot(2, 3, 2)
+pt.imshow(spectrum, cmap="gray")
+pt.title("Spectrum Before Log Enhanced")
+pt.subplot(2, 3, 3)
+pt.imshow(spectrum_log, cmap="gray")
+pt.title("Spectrum After Log Enhanced")
+pt.subplot(2, 3, 4)
+pt.imshow(simple_original, cmap="gray")
+pt.title("Restructured image")
+pt.subplot(2, 3, 5)
+pt.imshow(np.abs(simple_image - simple_original), cmap="gray")
+pt.title("Difference between simple image and restructured image")
+pt.subplot(2, 3, 6)
+pt.imshow(phase, cmap="gray")
+pt.title("Phase")
+pt.tight_layout()
+pt.show()
